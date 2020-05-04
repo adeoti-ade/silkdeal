@@ -32,7 +32,7 @@ class DealsSpider(scrapy.Spider):
         # driver.save_screenshot("after_filling.png")
 
         search_input.send_keys(Keys.ENTER)
-        driver.save_screenshot("enter.png")
+        # driver.save_screenshot("enter.png")
 
         html = driver.page_source
         html_response = Selector(text=html)
