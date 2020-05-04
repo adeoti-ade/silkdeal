@@ -1,11 +1,30 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy_selenium import SeleniumRequest
 
 
 class DealsSpider(scrapy.Spider):
     name = 'deals'
-    allowed_domains = ['example.com']
-    start_urls = ['http://example.com/']
+
+    def start_requests(self):
+
+        yield SeleniumRequest(
+            url = 'https://google.com',
+            wait_time = 3,
+            screenshot = True,
+            callback=self.parse
+        )
 
     def parse(self, response):
-        pass
+        
+        # img = response.meta['screenshot']
+
+        # with open('screenshot.png', 'wb') as f:
+        #     f.write(img)
+
+        driver = response.meta['driver']
+
+        search_input = driver.find_element_by_xpath("//input[@class='gLFyf gsfi']")
+        search_input.send_keys("Hello World!")
+
+        driver.save_screenshot("after_filling.png")
