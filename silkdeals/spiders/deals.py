@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy_selenium import SeleniumRequest
+from selenium.webdriver.common.keys import Keys
 
 
 class DealsSpider(scrapy.Spider):
@@ -27,4 +28,7 @@ class DealsSpider(scrapy.Spider):
         search_input = driver.find_element_by_xpath("//input[@class='gLFyf gsfi']")
         search_input.send_keys("Hello World!")
 
-        driver.save_screenshot("after_filling.png")
+        # driver.save_screenshot("after_filling.png")
+
+        search_input.send_keys(Keys.ENTER)
+        driver.save_screenshot("enter.png")
