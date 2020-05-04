@@ -2,6 +2,7 @@
 import scrapy
 from scrapy_selenium import SeleniumRequest
 from selenium.webdriver.common.keys import Keys
+from scrapy.selector import Selector
 
 
 class DealsSpider(scrapy.Spider):
@@ -32,3 +33,13 @@ class DealsSpider(scrapy.Spider):
 
         search_input.send_keys(Keys.ENTER)
         driver.save_screenshot("enter.png")
+
+        html = driver.page_source
+        html_response = Selector(text=html)
+
+        links = html_response.xpath("//div[@class='r']/a")
+
+        for link in links:
+            yield {
+                'url': link.xpath("./@href")
+            }
