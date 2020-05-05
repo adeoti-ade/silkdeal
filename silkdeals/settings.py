@@ -99,3 +99,5 @@ from shutil import which
 SELENIUM_DRIVER_NAME = 'chrome'
 SELENIUM_DRIVER_EXECUTABLE_PATH = './chromedriver'
 SELENIUM_DRIVER_ARGUMENTS=['-headless']
+
+FEED_EXPORT_ENCODING = 'utf-8'
